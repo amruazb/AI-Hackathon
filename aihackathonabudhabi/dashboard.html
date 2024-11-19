@@ -172,7 +172,7 @@
     <div class="container">
         <aside class="sidebar">
             <div class="logo">
-                <img src="https://via.placeholder.com/32" alt="Abu Dhabi Logo" width="32" height="32">
+                <img src="logo.png" alt="Abu Dhabi Logo" width="32" height="32">
                 <span>Abu Dhabi Gov</span>
             </div>
             <nav>
@@ -195,10 +195,14 @@
                 <h1>Dashboard</h1>
                 <div class="user-info">
                     <span>John Doe</span>
-                    <button class="logout-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    <button class="logout-btn" id="logout-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
                         Logout
-                    </button>
+                    </button>   
                 </div>
             </header>
             <div class="card-grid">
@@ -227,6 +231,51 @@
                     <canvas id="opinionChart"></canvas>
                 </div>
             </div>
+            <div class="chart">
+                <div class="chart-title">Requests Overview</div>
+                <div class="chart-container">
+                    <canvas id="requestsChart"></canvas>
+                </div>
+            </div>
+            <script>
+                const ctx = document.getElementById('requestsChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                        datasets: [{
+                            label: 'Requests',
+                            data: [65, 59, 80, 81, 56, 55],
+                            fill: false,
+                            borderColor: '#3b82f6',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Months'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Number of Requests'
+                                },
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script>                    
             <div class="activity-list">
                 <div class="activity-title">Recent Activity</div>
                 <div class="activity-item">
@@ -244,6 +293,7 @@
             </div>
         </main>
     </div>
+ 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var ctx = document.getElementById('opinionChart').getContext('2d');
@@ -281,6 +331,15 @@
                     }
                 }
             });
+        });
+
+        // Select the logout button
+        const logoutButton = document.getElementById("logout-btn");
+
+        // Add an event listener to the logout button
+        logoutButton.addEventListener("click", function() {
+            // Redirect to index page
+            window.location.href = "index.html";  // Replace with the correct path to your index page
         });
     </script>
 </body>
